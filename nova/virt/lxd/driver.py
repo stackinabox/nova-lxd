@@ -1366,11 +1366,13 @@ class LXDDriver(driver.ComputeDriver):
                     config['devices'].update(ephemeral_storage)
             if instance.flavor.extra_specs.get('lxd:docker_allowed', False):
                devices = config['devices']
-               config['security.nesting'] = 'True'
-               config['linux.kernel_modules'] = 'overlay, nf_nat'
+               conf = config['config']
+               conf['security.nesting'] = 'True'
+               conf['linux.kernel_modules'] = 'overlay, nf_nat'
                devices['aadisable'] = {'path': '/sys/module/apparmor/parameters/enabled', 'source': '/dev/null', 'type': 'disk'}
                devices['fuse'] = {'path': '/dev/fuse', 'type': 'unix-char'}
                config['devices'] = devices
+               config['config'] = conf
             if network_info:
                 config['devices'].update(self.create_network(
                     instance_name, instance, network_info))
