@@ -1370,7 +1370,7 @@ class LXDDriver(driver.ComputeDriver):
                conf['boot.autostart'] = 'true'
                conf['security.nesting'] = 'true'
                conf['security.privileged'] = 'true'
-               conf['linux.kernel_modules'] = 'overlay, nf_nat'
+               conf['linux.kernel_modules'] = 'overlay, nf_nat, iptable_nat, ip6table_nat, ebtables, openvswitch'
                conf['raw.lxc'] = 'lxc.aa_profile=unconfined'
                conf['security.nesting'] = 'true'
                conf['security.privileged'] = 'true'
@@ -1381,6 +1381,7 @@ class LXDDriver(driver.ComputeDriver):
                devices['tty0'] = {'path': '/dev/tty0', 'type': 'unix-char'}
                devices['ttyS0'] = {'path': '/dev/ttyS0', 'type': 'unix-char'}
                devices['tun'] = {'path': '/dev/net/tun', 'type': 'unix-char'}
+               devices['mem'] = {'path': '/dev/mem', 'type': 'unix-char'}
                config['devices'] = devices
                config['config'] = conf
             if network_info:
