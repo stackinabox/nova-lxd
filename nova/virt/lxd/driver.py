@@ -1367,10 +1367,20 @@ class LXDDriver(driver.ComputeDriver):
             if instance.flavor.extra_specs.get('lxd:docker_allowed', False):
                devices = config['devices']
                conf = config['config']
-               conf['security.nesting'] = 'True'
+               conf['boot.autostart'] = 'true'
+               conf['security.nesting'] = 'true'
+               conf['security.privileged'] = 'true'
                conf['linux.kernel_modules'] = 'overlay, nf_nat'
+               conf['raw.lxc'] = 'lxc.aa_profile=unconfined'
+               conf['security.nesting'] = 'true'
+               conf['security.privileged'] = 'true'
                devices['aadisable'] = {'path': '/sys/module/apparmor/parameters/enabled', 'source': '/dev/null', 'type': 'disk'}
+               devices['console'] = {'path': '/dev/console', 'type': 'unix-char'}
                devices['fuse'] = {'path': '/dev/fuse', 'type': 'unix-char'}
+               devices['tty'] = {'path': '/dev/tty', 'type': 'unix-char'}
+               devices['tty0'] = {'path': '/dev/tty0', 'type': 'unix-char'}
+               devices['ttyS0'] = {'path': '/dev/ttyS0', 'type': 'unix-char'}
+               devices['tun'] = {'path': '/dev/net/tun', 'type': 'unix-char'}
                config['devices'] = devices
                config['config'] = conf
             if network_info:
