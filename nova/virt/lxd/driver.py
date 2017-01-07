@@ -1371,7 +1371,7 @@ class LXDDriver(driver.ComputeDriver):
                conf['security.nesting'] = 'true'
                conf['security.privileged'] = 'true'
                conf['linux.kernel_modules'] = 'overlay, nf_nat, iptable_nat, ip6table_nat, ebtables, openvswitch'
-               conf['raw.lxc'] = '\nlxc.aa_profile=unconfined\nlxc.cap.drop=\n'
+               conf['raw.lxc'] = 'lxc.aa_profile=unconfined\nlxc.cap.drop=\nlxc.console.logfile=%s\n' % container_utils.get_console_path(instance_name)
                conf['security.nesting'] = 'true'
                conf['security.privileged'] = 'true'
                devices['aadisable'] = {'path': '/sys/module/apparmor/parameters/enabled', 'source': '/dev/null', 'type': 'disk'}
@@ -1420,7 +1420,7 @@ class LXDDriver(driver.ComputeDriver):
                 config['limits.cpu'] = str(vcpus)
 
             # Configure the console for the instance
-            config['raw.lxc'] = 'lxc.console.logfile=%s\n' \
+            config['raw.lxc'] = 'lxc.aa_profile=unconfined\nlxc.cap.drop=\nlxc.console.logfile=%s\n' \
                 % container_utils.get_console_path(instance_name)
 
             return config
