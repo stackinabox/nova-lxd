@@ -1371,9 +1371,7 @@ class LXDDriver(driver.ComputeDriver):
                conf['security.nesting'] = 'true'
                conf['security.privileged'] = 'true'
                conf['linux.kernel_modules'] = 'overlay, nf_nat, iptable_nat, ip6table_nat, ebtables, openvswitch'
-               conf['raw.lxc'] = '| \
-                    lxc.aa_profile=unconfined \
-                    lxc.cap.drop= '
+               conf['raw.lxc'] = '|\nlxc.aa_profile=unconfined\nlxc.cap.drop=\n'
                conf['security.nesting'] = 'true'
                conf['security.privileged'] = 'true'
                devices['aadisable'] = {'path': '/sys/module/apparmor/parameters/enabled', 'source': '/dev/null', 'type': 'disk'}
