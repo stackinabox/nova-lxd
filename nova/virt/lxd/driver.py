@@ -1370,7 +1370,7 @@ class LXDDriver(driver.ComputeDriver):
                conf['boot.autostart'] = 'true'
                conf['security.nesting'] = 'true'
                conf['security.privileged'] = 'true'
-               conf['linux.kernel_modules'] = 'overlay, nf_nat, iptable_nat, ip6table_nat, ebtables, openvswitch'
+               conf['linux.kernel_modules'] = 'overlay, nf_nat, iptable_nat, ip6table_nat, ebtables, openvswitch, br_netfilter'
                conf['raw.lxc'] = 'lxc.aa_profile=unconfined\nlxc.cap.drop=\nlxc.console.logfile=%s\n' % container_utils.get_console_path(instance_name)
                conf['security.nesting'] = 'true'
                conf['security.privileged'] = 'true'
